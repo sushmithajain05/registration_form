@@ -5,10 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from django.contrib.auth import authenticate,login,logout
 
-
 def homepage(request):
     return render(request,'app1/index.html')
-
 
 def register(request):
      form=CreateUserForm()
@@ -16,16 +14,11 @@ def register(request):
           form=CreateUserForm(request.POST)
           if form.is_valid():
                form.save()
-
                return redirect("my_login")
-          
      context={'registerform':form}
      return render(request,'app1/register.html',context=context)
 
-
-
 def my_login(request):
-
      form=LoginForm()
      if request.method=='POST':
           form=LoginForm(request,data=request.POST)
@@ -42,9 +35,6 @@ def my_login(request):
 def user_logout(request):
      auth.logout(request)
      return redirect("")
-
-
-
 
 @login_required(login_url="my_login")
 
